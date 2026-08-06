@@ -10,8 +10,8 @@ namespace usart {
     private:
       /* data */
     public:
-      USART(/* args */);
-      ~USART();
+      USART(/* args */) = default;
+      ~USART() = default
   
     };
     

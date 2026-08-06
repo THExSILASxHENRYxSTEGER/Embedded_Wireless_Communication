@@ -96,3 +96,5 @@ namespace usart
     constexpr uint32_t UCESM    = 1u << 23;
   }
 }
+
+// !!!!!!!!!!! Add the other registers and check that these are correct
