@@ -1,4 +1,12 @@
-## Bare Metal STM32F7 Ethernet Input Bluetooth Output
+## Bare Metal STM32f756ZGT6U Ethernet Input Bluetooth Output
+
+# STM32f756ZGT6U task description
+
+The STM32f756ZGT6U acts on the receiver side and firstly acts as the user 
+interface in that it lets the user choose which video is selected via USART.
+Then, once the user prompts a video the data is retreived via the ethernet 
+connection to another computer or router. 
+Finally, the data is sent to the nRF52840 via SPI.
 
 # To Compile the and Link the image to flash:
 

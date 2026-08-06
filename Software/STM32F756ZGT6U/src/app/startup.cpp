@@ -1,10 +1,10 @@
 #include <stdint.h>
 
-/* Ensure C linkage for vector table and handlers */
+/** Ensure C linkage for vector table and handlers */
 extern "C"
 {
 
-  /* Linker symbols */
+  /** Linker symbols */
   extern uint32_t _estack;    // End of stack address
   
   extern uint32_t _sidata;    // Start of initialized data in Flash memory
@@ -14,7 +14,7 @@ extern "C"
   extern uint32_t _sbss;      // Start of uninitialized data in RAM
   extern uint32_t _ebss;      // End of uninitialized data in RAM
   
-  /* libc constructor function */
+  /** libc constructor function */
   extern void __libc_init_array(void);
 
   /**
@@ -266,36 +266,41 @@ extern "C"
     uint32_t *src;
     uint32_t *dst;
 
-    /* Copy initialized data from FLASH to RAM */
+    /** Copy initialized data from FLASH to RAM */
     src = &_sidata;
     dst = &_sdata;
     while (dst < &_edata)
         *dst++ = *src++;
 
-    /* Zero initialize BSS */
+    /** Zero initialize BSS */
     dst = &_sbss;
     while (dst < &_ebss)
         *dst++ = 0;
 
-    /* Call all global C++ constructors */
+    /** Call all global C++ constructors */
     __libc_init_array();
 
     /* Enter main */
     main();
 
-    /* Infinite loop if main returns */
+    /** Infinite loop if main returns */
     while (1);
   }
 
-/**
- * @brief Default interrupt handler.
- *
- * This handler is executed when an unimplemented interrupt occurs.
- * It enters an infinite loop to halt program execution.
- */
+  /**
+   * @brief Default interrupt handler.
+   *
+   * This handler is executed when an unimplemented interrupt occurs.
+   * It enters an infinite loop to halt program execution.
+   */
   void Default_Handler(void)
   {
     while (1);
+  }
+
+  /* required by newlib */
+  void _init(void)
+  {
   }
 
 }
