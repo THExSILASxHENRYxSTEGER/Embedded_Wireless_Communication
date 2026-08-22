@@ -36,9 +36,37 @@ concept RegisterEnum =
  * @return The bitwise OR of @p lhs and @p rhs.
  */
 template<RegisterEnum E>
-constexpr E operator|(E lhs, E rhs)
+constexpr std::underlying_type_t<E> operator|(E lhs, E rhs)
 {
-    return static_cast<E>(to_underlying(lhs) | to_underlying(rhs));
+    return static_cast<std::underlying_type_t<E>>(to_underlying(lhs) | to_underlying(rhs));
+}
+
+/**
+ * @brief Performs a bitwise OR between on uint32_t and one enumeration value.
+ *
+ * @tparam E Enumeration type with a std::uint32_t underlying type.
+ * @param lhs Left-hand operand.
+ * @param rhs Right-hand operand.
+ * @return The bitwise OR of @p lhs and @p rhs.
+ */
+template<RegisterEnum E>
+constexpr std::uint32_t operator|(std::uint32_t lhs, E rhs)
+{
+    return lhs | to_underlying(rhs);
+}
+
+/**
+ * @brief Performs a bitwise OR between on one enumeration and one uint32_t value.
+ *
+ * @tparam E Enumeration type with a std::uint32_t underlying type.
+ * @param lhs Left-hand operand.
+ * @param rhs Right-hand operand.
+ * @return The bitwise OR of @p lhs and @p rhs.
+ */
+template<RegisterEnum E>
+constexpr std::uint32_t operator|(E lhs, std::uint32_t rhs)
+{
+    return to_underlying(lhs) | rhs;
 }
 
 /**
@@ -172,3 +200,48 @@ constexpr std::uint32_t operator>>(E1 lhs, E2 rhs)
 {
     return to_underlying(lhs) >> to_underlying(rhs);
 }
+
+
+/**
+ * @brief Subtract two enum types from one another.
+ *
+ * @tparam E1 Left-hand enumeration type.
+ * @tparam E2 Right-hand enumeration type.
+ * @param lhs Enumeration value to subtract from.
+ * @param rhs Enumeration value to be subtracted.
+ * @return The subtracted value.
+ */
+template<RegisterEnum E1, RegisterEnum E2>
+constexpr std::uint32_t operator-(const E1& lhs, const E2& rhs)
+{
+    return to_underlying(lhs) - to_underlying(rhs);
+}
+
+/**
+ * @brief Performs an in-place division operation.
+ *
+ * @tparam E Enumeration type with a std::uint32_t underlying type.
+ * @param lhs Left-hand operand.
+ * @param rhs Right-hand operand.
+ * @return Reference to @p lhs.
+ */
+template<RegisterEnum E>
+constexpr std::underlying_type_t<E> operator/(E lhs, std::uint32_t rhs)
+{
+    return to_underlying(lhs) / rhs;
+}
+
+/**
+ * @brief Performs an in-place modulo operation.
+ *
+ * @tparam E Enumeration type with a std::uint32_t underlying type.
+ * @param lhs Left-hand operand.
+ * @param rhs Right-hand operand.
+ * @return Reference to @p lhs.
+ */
+template<RegisterEnum E>
+constexpr std::underlying_type_t<E> operator%(E lhs, std::uint32_t rhs)
+{
+    return to_underlying(lhs) % rhs;
+}
+
