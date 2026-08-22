@@ -34,7 +34,7 @@ namespace rcc {
       // Set bits in the RCC_APB1ENR register
       set_bits(rcc_regs_->RCC_APB1ENR, peripheral);
     } else {
-      // Set bits in the RCC_APB1ENR register
+      // Set bits in the RCC_APB2ENR register
       set_bits(rcc_regs_->RCC_APB2ENR, peripheral);
     }
   }

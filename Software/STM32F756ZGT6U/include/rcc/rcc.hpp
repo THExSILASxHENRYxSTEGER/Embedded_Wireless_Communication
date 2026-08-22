@@ -4,7 +4,7 @@
  */
 #pragma once
 
-#include "addresses/addresses.hpp"
+#include "global/addresses.hpp"
 #include <rcc/rcc_bits.hpp>
 #include <rcc/rcc_regs.hpp>
 
