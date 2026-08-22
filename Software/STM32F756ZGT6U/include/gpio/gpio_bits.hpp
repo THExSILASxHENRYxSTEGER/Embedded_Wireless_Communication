@@ -40,38 +40,10 @@ namespace gpio {
    */
   enum class GPIO_MODER : std::uint32_t
   {
-    MODER0_0   = 1u << 0,   // Pin 0 mode selection bit 0
-    MODER0_1   = 1u << 1,   // Pin 0 mode selection bit 1
-    MODER1_0   = 1u << 2,   // Pin 1 mode selection bit 0
-    MODER1_1   = 1u << 3,   // Pin 1 mode selection bit 1
-    MODER2_0   = 1u << 4,   // Pin 2 mode selection bit 0
-    MODER2_1   = 1u << 5,   // Pin 2 mode selection bit 1
-    MODER3_0   = 1u << 6,   // Pin 3 mode selection bit 0
-    MODER3_1   = 1u << 7,   // Pin 3 mode selection bit 1
-    MODER4_0   = 1u << 8,   // Pin 4 mode selection bit 0
-    MODER4_1   = 1u << 9,   // Pin 4 mode selection bit 1
-    MODER5_0   = 1u << 10,  // Pin 5 mode selection bit 0
-    MODER5_1   = 1u << 11,  // Pin 5 mode selection bit 1
-    MODER6_0   = 1u << 12,  // Pin 6 mode selection bit 0
-    MODER6_1   = 1u << 13,  // Pin 6 mode selection bit 1
-    MODER7_0   = 1u << 14,  // Pin 7 mode selection bit 0
-    MODER7_1   = 1u << 15,  // Pin 7 mode selection bit 1
-    MODER8_0   = 1u << 16,  // Pin 8 mode selection bit 0
-    MODER8_1   = 1u << 17,  // Pin 8 mode selection bit 1
-    MODER9_0   = 1u << 18,  // Pin 9 mode selection bit 0
-    MODER9_1   = 1u << 19,  // Pin 9 mode selection bit 1
-    MODER10_0  = 1u << 20,  // Pin 10 mode selection bit 0
-    MODER10_1  = 1u << 21,  // Pin 10 mode selection bit 1
-    MODER11_0  = 1u << 22,  // Pin 11 mode selection bit 0
-    MODER11_1  = 1u << 23,  // Pin 11 mode selection bit 1
-    MODER12_0  = 1u << 24,  // Pin 12 mode selection bit 0
-    MODER12_1  = 1u << 25,  // Pin 12 mode selection bit 1
-    MODER13_0  = 1u << 26,  // Pin 13 mode selection bit 0
-    MODER13_1  = 1u << 27,  // Pin 13 mode selection bit 1
-    MODER14_0  = 1u << 28,  // Pin 14 mode selection bit 0
-    MODER14_1  = 1u << 29,  // Pin 14 mode selection bit 1
-    MODER15_0  = 1u << 30,  // Pin 15 mode selection bit 0
-    MODER15_1  = 1u << 31,  // Pin 15 mode selection bit 1
+    INPUT_MODE  = 0u,   // Pin in input mode
+    OUTPUT_MODE = 1u,   // Pin in general purpose output mode 
+    AF_MODE     = 2u,   // Pin in alternate function mode
+    ANALOG_MODE = 3u,   // Pin in analog mode
   };
   
   /**
@@ -106,38 +78,10 @@ namespace gpio {
    */  
   enum class GPIO_OSPEEDR : std::uint32_t
   {
-    OSPEEDR0_0   = 1u << 0,   // Pin 0 output speed bit 0
-    OSPEEDR0_1   = 1u << 1,   // Pin 0 output speed bit 1
-    OSPEEDR1_0   = 1u << 2,   // Pin 1 output speed bit 0
-    OSPEEDR1_1   = 1u << 3,   // Pin 1 output speed bit 1
-    OSPEEDR2_0   = 1u << 4,   // Pin 2 output speed bit 0
-    OSPEEDR2_1   = 1u << 5,   // Pin 2 output speed bit 1
-    OSPEEDR3_0   = 1u << 6,   // Pin 3 output speed bit 0
-    OSPEEDR3_1   = 1u << 7,   // Pin 3 output speed bit 1
-    OSPEEDR4_0   = 1u << 8,   // Pin 4 output speed bit 0
-    OSPEEDR4_1   = 1u << 9,   // Pin 4 output speed bit 1
-    OSPEEDR5_0   = 1u << 10,  // Pin 5 output speed bit 0
-    OSPEEDR5_1   = 1u << 11,  // Pin 5 output speed bit 1
-    OSPEEDR6_0   = 1u << 12,  // Pin 6 output speed bit 0
-    OSPEEDR6_1   = 1u << 13,  // Pin 6 output speed bit 1
-    OSPEEDR7_0   = 1u << 14,  // Pin 7 output speed bit 0
-    OSPEEDR7_1   = 1u << 15,  // Pin 7 output speed bit 1
-    OSPEEDR8_0   = 1u << 16,  // Pin 8 output speed bit 0
-    OSPEEDR8_1   = 1u << 17,  // Pin 8 output speed bit 1
-    OSPEEDR9_0   = 1u << 18,  // Pin 9 output speed bit 0
-    OSPEEDR9_1   = 1u << 19,  // Pin 9 output speed bit 1
-    OSPEEDR10_0  = 1u << 20,  // Pin 10 output speed bit 0
-    OSPEEDR10_1  = 1u << 21,  // Pin 10 output speed bit 1
-    OSPEEDR11_0  = 1u << 22,  // Pin 11 output speed bit 0
-    OSPEEDR11_1  = 1u << 23,  // Pin 11 output speed bit 1
-    OSPEEDR12_0  = 1u << 24,  // Pin 12 output speed bit 0
-    OSPEEDR12_1  = 1u << 25,  // Pin 12 output speed bit 1
-    OSPEEDR13_0  = 1u << 26,  // Pin 13 output speed bit 0
-    OSPEEDR13_1  = 1u << 27,  // Pin 13 output speed bit 1
-    OSPEEDR14_0  = 1u << 28,  // Pin 14 output speed bit 0
-    OSPEEDR14_1  = 1u << 29,  // Pin 14 output speed bit 1
-    OSPEEDR15_0  = 1u << 30,  // Pin 15 output speed bit 0
-    OSPEEDR15_1  = 1u << 31,  // Pin 15 output speed bit 1
+    LOW_SPEED       = 0u,   // Pin speed low 
+    MEDIUM_SPEED    = 1u,   // Pin speed medium 
+    HIGH_SPEED      = 2u,   // Pin speed high 
+    VERY_HIGH_SPEED = 3u,   // Pin speed very high  
   };
 
   /**
@@ -303,7 +247,7 @@ namespace gpio {
    * 
    * Use these values to manipulate the GPIOx_AFRL and the GPIOx_AFRH register.
    */
-  enum class GPIO_AFRL : std::uint32_t
+  enum class GPIO_AF : std::uint32_t
   {
     AF0   = 0,   // alternate function 0
     AF1   = 1,   // alternate function 1
