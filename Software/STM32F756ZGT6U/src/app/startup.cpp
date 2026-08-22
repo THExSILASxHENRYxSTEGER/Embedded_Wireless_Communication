@@ -1,3 +1,6 @@
+#include "usart/usart.hpp"
+#include "input_buffer/input_buffer.hpp"
+
 #include <stdint.h>
 
 /** Ensure C linkage for vector table and handlers */
@@ -78,9 +81,9 @@ extern "C"
   void I2C2_ER_Handler(void)                 __attribute__((weak, alias("Default_Handler")));
   void SPI1_Handler(void)                    __attribute__((weak, alias("Default_Handler")));
   void SPI2_Handler(void)                    __attribute__((weak, alias("Default_Handler")));
-  void USART1_Handler(void)                  __attribute__((weak, alias("Default_Handler")));
-  void USART2_Handler(void)                  __attribute__((weak, alias("Default_Handler")));
-  void USART3_Handler(void)                  __attribute__((weak, alias("Default_Handler")));
+  void USART1_Handler(void);
+  void USART2_Handler(void);
+  void USART3_Handler(void);
   void EXTI15_10_Handler(void)               __attribute__((weak, alias("Default_Handler")));
   void RTC_Alarm_Handler(void)               __attribute__((weak, alias("Default_Handler")));
   void OTG_FS_WKUP_Handler(void)             __attribute__((weak, alias("Default_Handler")));
@@ -287,6 +290,33 @@ extern "C"
     while (1);
   }
 
+  /**
+   * @brief USART 1 interrupt handler
+   * This writes a byte received upon an interrupt into the ring buffer that stores input data
+   */
+  void USART1_Handler(void)
+  {
+    usart::usart_1.read(input_buffer::ib);
+  }
+
+  /**
+   * @brief USART 2 interrupt handler
+   * This writes a byte received upon an interrupt into the ring buffer that stores input data
+   */
+  void USART2_Handler(void)
+  {
+    usart::usart_2.read(input_buffer::ib);
+  }
+
+  /**
+   * @brief USART 3 interrupt handler
+   * This writes a byte received upon an interrupt into the ring buffer that stores input data
+   */
+  void USART3_Handler(void)
+  {
+    usart::usart_3.read(input_buffer::ib);
+  }
+  
   /**
    * @brief Default interrupt handler.
    *
