@@ -16,12 +16,12 @@ namespace addresses
 {
 
   /**
-   * @brief RCC hardware regsiter Address
+   * @brief RCC physical hardware regsiter Address
    */
   constexpr std::uint32_t RCC = 0x40023800;
   
   /**
-   * @brief GPIO ports hardware register addresses
+   * @brief GPIO ports physical hardware register addresses
    */
   constexpr std::uint32_t GPIO_PORT_A = 0x40020000;
   constexpr std::uint32_t GPIO_PORT_B = 0x40020400;
@@ -34,5 +34,23 @@ namespace addresses
   constexpr std::uint32_t GPIO_PORT_I = 0x40022000;
   constexpr std::uint32_t GPIO_PORT_J = 0x40022400;
   constexpr std::uint32_t GPIO_PORT_K = 0x40022800;
+
+  /**
+   * @brief USART/UART physical hardware register addresses
+   */
+  constexpr std::uint32_t USART1 = 0x40011000;
+  constexpr std::uint32_t USART2 = 0x40004400;
+  constexpr std::uint32_t USART3 = 0x40004800;
+  constexpr std::uint32_t UART4  = 0x40004C00;
+  constexpr std::uint32_t UART5  = 0x40005000;
+  constexpr std::uint32_t USART6 = 0x40011400;
+  constexpr std::uint32_t UART7  = 0x40007800;
+  constexpr std::uint32_t UART8  = 0x40007C00;
+
+  /**
+   * @brief NVIC cortex M7 physical hardware register addresses
+   * 
+   */
+  constexpr std::uint32_t NVIC_ISER0 = 0xE000E100;
   
 }
