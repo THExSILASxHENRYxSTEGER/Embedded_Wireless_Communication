@@ -16,9 +16,10 @@ namespace addresses
 {
 
   /**
-   * @brief RCC physical hardware regsiter Address
+   * @brief Basic timer physical hardware register addresses
    */
-  constexpr std::uint32_t RCC = 0x40023800;
+  constexpr std::uint32_t BASIC_TIMER_5 = 0x40000C00;
+  constexpr std::uint32_t BASIC_TIMER_6 = 0x40001000;
   
   /**
    * @brief GPIO ports physical hardware register addresses
@@ -36,6 +37,26 @@ namespace addresses
   constexpr std::uint32_t GPIO_PORT_K = 0x40022800;
 
   /**
+   * @brief I2C physical hardware register addresses
+   * 
+   */
+  constexpr std::uint32_t I2C1 = 0x40005400;
+  constexpr std::uint32_t I2C2 = 0x40005800;
+  constexpr std::uint32_t I2C3 = 0x40005C00;
+  constexpr std::uint32_t I2C4 = 0x40006000;
+
+  /**
+   * @brief NVIC cortex M7 physical hardware register addresses
+   * 
+   */
+  constexpr std::uint32_t NVIC = 0xE000E100;
+
+  /**
+   * @brief RCC physical hardware regsiter Address
+   */
+  constexpr std::uint32_t RCC = 0x40023800;
+
+  /**
    * @brief USART/UART physical hardware register addresses
    */
   constexpr std::uint32_t USART1 = 0x40011000;
@@ -47,10 +68,4 @@ namespace addresses
   constexpr std::uint32_t UART7  = 0x40007800;
   constexpr std::uint32_t UART8  = 0x40007C00;
 
-  /**
-   * @brief NVIC cortex M7 physical hardware register addresses
-   * 
-   */
-  constexpr std::uint32_t NVIC_ISER0 = 0xE000E100;
-  
 }
