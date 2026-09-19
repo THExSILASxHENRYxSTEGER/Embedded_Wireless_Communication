@@ -20,17 +20,19 @@ namespace gpio
     const std::uint32_t moder_mask = gpio_moder << (pin_num * PIN_NUM_FACTOR);
     set_bits(port_regs_->MODER, moder_mask);
   }
-  
-  void GPIO_PORT::set_pin_pup_speed(GPIO_PIN pin_num, GPIO_OSPEEDR gpio_speed)
+
+  void GPIO_PORT::set_pin_otyper_speed(GPIO_PIN pin_num, GPIO_OTYPER out_type, GPIO_OSPEEDR gpio_speed)
   {
-    // set pin to push-pull in OTYPER register
-    clear_bits(port_regs_->OTYPER, GPIO_OTYPER::OT0 << pin_num);
+    // Clear previous output type state
+    clear_bits(port_regs_->OTYPER, GPIO_OTYPER::OPEN_DRAIN << pin_num);
+    // Set output type state
+    set_bits(port_regs_->OTYPER, out_type << pin_num);
     // set pin transition speed in OTYPER register
     const std::uint32_t speed_mask = gpio_speed << (pin_num * PIN_NUM_FACTOR);
     set_bits(port_regs_->OSPEEDR, speed_mask);
   }
 
-  void GPIO_PORT::pull_pin_down(GPIO_PIN pin_num)
+  void GPIO_PORT::pull_pin_down(GPIO_PIN pin_num, bool GPIO_mode)
   {
     // Clear the bits in the GPIOx_PUPDR register that pull the given pin up
     clear_bits(port_regs_->PUPDR, GPIO_PUPDR::PIN0UP << (pin_num * PIN_NUM_FACTOR));
@@ -38,11 +40,12 @@ namespace gpio
     // Set the bits in the GPIOx_PUPDR register that pull the given pin down
     set_bits(port_regs_->PUPDR, GPIO_PUPDR::PIN0DOWN << (pin_num * PIN_NUM_FACTOR));
     
-    // Set the bits in the GPIOx_BSRR register to reset the pin output
-    set_bits(port_regs_->BSRR, GPIO_BSRR::BR0 << pin_num);
+    // Set the bits in the GPIOx_BSRR register to reset the pin output in GPIO mode
+    if (GPIO_mode)
+      set_bits(port_regs_->BSRR, GPIO_BSRR::BR0 << pin_num);
   }
 
-  void GPIO_PORT::pull_pin_up(GPIO_PIN pin_num)
+  void GPIO_PORT::pull_pin_up(GPIO_PIN pin_num, bool GPIO_mode)
   {
     // Clear the bits in the GPIOx_PUPDR register that pull the given pin down
     clear_bits(port_regs_->PUPDR, GPIO_PUPDR::PIN0DOWN << (pin_num * PIN_NUM_FACTOR));
@@ -50,16 +53,17 @@ namespace gpio
     // Set the bits in the GPIOx_PUPDR register that pull the given pin up
     set_bits(port_regs_->PUPDR, GPIO_PUPDR::PIN0UP << (pin_num * PIN_NUM_FACTOR));
     
-    // Set the bits in the GPIOx_BSRR register to reset the pin output
-    set_bits(port_regs_->BSRR, GPIO_BSRR::BS0 << pin_num);   
+    // Set the bits in the GPIOx_BSRR register to reset the pin output in GPIO mode
+    if (GPIO_mode)
+      set_bits(port_regs_->BSRR, GPIO_BSRR::BS0 << pin_num);   
   }
 
-  void GPIO_PORT::enable_and_set_pin_AF(GPIO_PIN pin_num, GPIO_AF gpio_af, GPIO_OSPEEDR gpio_speed, bool pin_up)
+  void GPIO_PORT::enable_and_set_pin_AF(GPIO_PIN pin_num, GPIO_AF gpio_af, GPIO_OTYPER out_type, GPIO_OSPEEDR gpio_speed, bool pin_up)
   {
     // Enable the pin with alternate function mode
     set_pin_mode(pin_num, GPIO_MODER::AF_MODE);
     // Set pin to push-pull and also set the speed
-    set_pin_pup_speed(pin_num, gpio_speed);
+    set_pin_otyper_speed(pin_num, out_type, gpio_speed);
     // Alternate functions take 4 bits
     const std::uint32_t af_bit_space = 4;
     // assign the pin the corresponding alternate function
@@ -71,7 +75,7 @@ namespace gpio
       set_bits(port_regs_->AFRH, afrh_mask);
     }
     // Optionally, pull the pin up
-    if (pin_up) pull_pin_up(pin_num);
+    if (pin_up) pull_pin_up(pin_num, false);
   }
 
 }

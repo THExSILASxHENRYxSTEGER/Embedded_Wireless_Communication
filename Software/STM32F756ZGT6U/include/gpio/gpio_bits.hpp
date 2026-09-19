@@ -46,6 +46,8 @@ namespace gpio {
     ANALOG_MODE = 3u,   // Pin in analog mode
   };
   
+
+
   /**
    * @brief GPIO port output type register bits.
    * 
@@ -53,22 +55,8 @@ namespace gpio {
    */
   enum class GPIO_OTYPER : std::uint32_t
   {
-    OT0  = 1u << 0,   // Pin 0 output type selection
-    OT1  = 1u << 1,   // Pin 1 output type selection
-    OT2  = 1u << 2,   // Pin 2 output type selection
-    OT3  = 1u << 3,   // Pin 3 output type selection
-    OT4  = 1u << 4,   // Pin 4 output type selection
-    OT5  = 1u << 5,   // Pin 5 output type selection
-    OT6  = 1u << 6,   // Pin 6 output type selection
-    OT7  = 1u << 7,   // Pin 7 output type selection
-    OT8  = 1u << 8,   // Pin 8 output type selection
-    OT9  = 1u << 9,   // Pin 9 output type selection
-    OT10 = 1u << 10,  // Pin 10 output type selection
-    OT11 = 1u << 11,  // Pin 11 output type selection
-    OT12 = 1u << 12,  // Pin 12 output type selection
-    OT13 = 1u << 13,  // Pin 13 output type selection
-    OT14 = 1u << 14,  // Pin 14 output type selection
-    OT15 = 1u << 15,  // Pin 15 output type selection
+    PUSH_PULL  = 0u,
+    OPEN_DRAIN = 1u,
   };
  
   /**

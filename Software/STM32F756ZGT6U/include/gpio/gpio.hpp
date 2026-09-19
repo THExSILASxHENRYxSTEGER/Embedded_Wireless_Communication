@@ -48,41 +48,46 @@ namespace gpio
        * @param gpio_pin The pin to modify.
        * @param speed The speed set the port output speed register (GPIOx_OSPEEDR).
        * 
-       * After execution the corresponding pin is ready to be pulled up and used at the given speed.
+       * After execution the corresponding pin is ready to be pulled up or set to opendrain and used at the given speed.
        * For that manipulate the GPIOx_OTYPER and the GPIOx_OSPEEDR register.
        */
-      void set_pin_pup_speed(GPIO_PIN pin_num, GPIO_OSPEEDR gpio_speed);
+      void set_pin_otyper_speed(GPIO_PIN pin_num, GPIO_OTYPER out_type, GPIO_OSPEEDR gpio_speed);
 
       /**
        * @brief Pull GPIO pin down.
        *
        * @param pin_num The pin to be pulled down.
+       * @param GPIO_mode Is the pin in GPIO mode or in AF mode.
        * 
        * After execution the corresponding pin is at 0V.
+       * The GPIO mode decides upon whther to set the BSRR bit.
        */
-      void pull_pin_down(GPIO_PIN pin_num);
+      void pull_pin_down(GPIO_PIN pin_num, bool GPIO_mode);
 
       /**
        * @brief Pull GPIO pin up.
        *
        * @param pin_num The pin to be pulled up.
+       * @param GPIO_mode Is the pin in GPIO mode or in AF mode.
        * 
        * After execution the corresponding pin is at 3.3V.
+       * The GPIO mode decides upon whther to set the BSRR bit.
        */
-      void pull_pin_up(GPIO_PIN pin_num);
+      void pull_pin_up(GPIO_PIN pin_num, bool GPIO_mode);
 
       /**
        * @brief Prepare everything for the pin to be used in alternate function mode.
        * 
        * @param pin_num The pin to be set to alternative function mode.
        * @param gpio_af The alternative function to set the pin to.
+       * @param out_type The output type written to the OTYPER register.
        * @param gpio_speed The speed that the pin is set to.
        * @param pin_up If true this pulls the pin up to 3.3V
        * 
        * After the call the corresponding pins GPIOx_MODER register is enabled to be of type
        * alternate function and GPIOx_AFRL or GPIOx_AFRH is set to that alternative function.
        */
-      void enable_and_set_pin_AF(GPIO_PIN pin_num, GPIO_AF gpio_af, GPIO_OSPEEDR gpio_speed, bool pin_up=false);
+      void enable_and_set_pin_AF(GPIO_PIN pin_num, GPIO_AF gpio_af, GPIO_OTYPER out_type, GPIO_OSPEEDR gpio_speed, bool pin_up=false);
       
       /**
        * @brief Default destruction of the GPIO port object.
