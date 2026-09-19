@@ -14,7 +14,7 @@
 template<typename E>
 constexpr auto to_underlying(E e)
 {
-    return static_cast<std::underlying_type_t<E>>(e);
+  return static_cast<std::underlying_type_t<E>>(e);
 }
 
 /**
@@ -24,8 +24,8 @@ constexpr auto to_underlying(E e)
  */
 template<typename E>
 concept RegisterEnum =
-    std::is_enum_v<E> &&
-    std::same_as<std::underlying_type_t<E>, std::uint32_t>;
+  std::is_enum_v<E> && 
+  std::same_as<std::underlying_type_t<E>, std::uint32_t>;
 
 /**
  * @brief Performs a bitwise OR between two enumeration values.
@@ -38,7 +38,7 @@ concept RegisterEnum =
 template<RegisterEnum E>
 constexpr std::underlying_type_t<E> operator|(E lhs, E rhs)
 {
-    return static_cast<std::underlying_type_t<E>>(to_underlying(lhs) | to_underlying(rhs));
+  return static_cast<std::underlying_type_t<E>>(to_underlying(lhs) | to_underlying(rhs));
 }
 
 /**
@@ -52,7 +52,7 @@ constexpr std::underlying_type_t<E> operator|(E lhs, E rhs)
 template<RegisterEnum E>
 constexpr std::uint32_t operator|(std::uint32_t lhs, E rhs)
 {
-    return lhs | to_underlying(rhs);
+  return lhs | to_underlying(rhs);
 }
 
 /**
@@ -66,7 +66,7 @@ constexpr std::uint32_t operator|(std::uint32_t lhs, E rhs)
 template<RegisterEnum E>
 constexpr std::uint32_t operator|(E lhs, std::uint32_t rhs)
 {
-    return to_underlying(lhs) | rhs;
+  return to_underlying(lhs) | rhs;
 }
 
 /**
@@ -80,8 +80,8 @@ constexpr std::uint32_t operator|(E lhs, std::uint32_t rhs)
 template<RegisterEnum E>
 constexpr E& operator|=(E& lhs, E rhs)
 {
-    lhs = lhs | rhs;
-    return lhs;
+  lhs = lhs | rhs;
+  return lhs;
 }
 
 /**
@@ -97,8 +97,8 @@ constexpr E& operator|=(E& lhs, E rhs)
 template<RegisterEnum E>
 volatile std::uint32_t& operator|=(volatile std::uint32_t& lhs, E rhs)
 {
-    lhs = lhs | to_underlying(rhs);
-    return lhs;
+  lhs = lhs | to_underlying(rhs);
+  return lhs;
 }
 
 /**
@@ -110,9 +110,23 @@ volatile std::uint32_t& operator|=(volatile std::uint32_t& lhs, E rhs)
  * @return The multiplication result.
  */
 template<RegisterEnum E>
-constexpr std::uint32_t operator*(E rhs, const std::uint32_t lhs)
+constexpr std::uint32_t operator*(E lhs, const std::uint32_t rhs)
 {
-    return lhs * to_underlying(rhs);
+  return to_underlying(lhs) * rhs;
+}
+
+/**
+ * @brief Multiplies an enumeration value by an unsigned integer.
+ *
+ * @tparam E Enumeration type with a std::uint32_t underlying type.
+ * @param lhs Unsigned integer.
+ * @param rhs Enumeration value.
+ * @return The multiplication result.
+ */
+template<RegisterEnum E>
+constexpr std::uint32_t operator*(const std::uint32_t lhs, E rhs)
+{
+  return lhs * to_underlying(rhs);
 }
 
 /**
@@ -126,7 +140,7 @@ constexpr std::uint32_t operator*(E rhs, const std::uint32_t lhs)
 template<RegisterEnum E>
 constexpr std::underlying_type_t<E> operator<<(E lhs, const std::uint32_t rhs)
 {
-    return to_underlying(lhs) << rhs;
+  return to_underlying(lhs) << rhs;
 }
 
 /**
@@ -140,7 +154,7 @@ constexpr std::underlying_type_t<E> operator<<(E lhs, const std::uint32_t rhs)
 template<RegisterEnum E>
 constexpr std::underlying_type_t<E> operator<<(const std::uint32_t lhs, E rhs)
 {
-    return lhs << to_underlying(rhs);
+  return lhs << to_underlying(rhs);
 }
 
 /**
@@ -155,7 +169,7 @@ constexpr std::underlying_type_t<E> operator<<(const std::uint32_t lhs, E rhs)
 template<RegisterEnum E1, RegisterEnum E2>
 constexpr std::uint32_t operator<<(E1 lhs, E2 rhs)
 {
-    return to_underlying(lhs) << to_underlying(rhs);
+  return to_underlying(lhs) << to_underlying(rhs);
 }
 
 /**
@@ -169,7 +183,7 @@ constexpr std::uint32_t operator<<(E1 lhs, E2 rhs)
 template<RegisterEnum E>
 constexpr std::underlying_type_t<E> operator>>(E lhs, const std::uint32_t rhs)
 {
-    return to_underlying(lhs) >> rhs;
+  return to_underlying(lhs) >> rhs;
 }
 
 /**
@@ -183,7 +197,7 @@ constexpr std::underlying_type_t<E> operator>>(E lhs, const std::uint32_t rhs)
 template<RegisterEnum E>
 constexpr std::underlying_type_t<E> operator>>(const std::uint32_t lhs, E rhs)
 {
-    return lhs >> to_underlying(rhs);
+  return lhs >> to_underlying(rhs);
 }
 
 /**
@@ -198,7 +212,7 @@ constexpr std::underlying_type_t<E> operator>>(const std::uint32_t lhs, E rhs)
 template<RegisterEnum E1, RegisterEnum E2>
 constexpr std::uint32_t operator>>(E1 lhs, E2 rhs)
 {
-    return to_underlying(lhs) >> to_underlying(rhs);
+  return to_underlying(lhs) >> to_underlying(rhs);
 }
 
 
@@ -214,7 +228,7 @@ constexpr std::uint32_t operator>>(E1 lhs, E2 rhs)
 template<RegisterEnum E1, RegisterEnum E2>
 constexpr std::uint32_t operator-(const E1& lhs, const E2& rhs)
 {
-    return to_underlying(lhs) - to_underlying(rhs);
+  return to_underlying(lhs) - to_underlying(rhs);
 }
 
 /**
@@ -228,7 +242,7 @@ constexpr std::uint32_t operator-(const E1& lhs, const E2& rhs)
 template<RegisterEnum E>
 constexpr std::underlying_type_t<E> operator/(E lhs, std::uint32_t rhs)
 {
-    return to_underlying(lhs) / rhs;
+  return to_underlying(lhs) / rhs;
 }
 
 /**
@@ -242,6 +256,6 @@ constexpr std::underlying_type_t<E> operator/(E lhs, std::uint32_t rhs)
 template<RegisterEnum E>
 constexpr std::underlying_type_t<E> operator%(E lhs, std::uint32_t rhs)
 {
-    return to_underlying(lhs) % rhs;
+  return to_underlying(lhs) % rhs;
 }
 
