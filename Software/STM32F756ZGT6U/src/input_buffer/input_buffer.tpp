@@ -37,4 +37,13 @@ namespace input_buffer
     len_ = 0;
   }
 
+  template <std::uint32_t max_input_len>
+  void INPUT_BUFFER<max_input_len>::fill(const char* str)
+  {
+    clear();
+    for (std::uint32_t i = 0; str[i] != '\0'; i++)
+      push_back(str[i]);
+    
+  }
+
 }
