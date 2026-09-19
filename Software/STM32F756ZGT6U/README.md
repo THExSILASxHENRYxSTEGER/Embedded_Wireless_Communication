@@ -15,6 +15,13 @@ docker run --rm -it \
     stm32-builder \
     make
 
+# To delete the build folder
+
+docker run --rm -it \
+    -v $(pwd):/app \
+    stm32-builder \
+    make clean
+
 # To Flash the application onto the stm32f756:
 
 1. To connect stm32 f7 with openOCD and GDB open in one terminal:
@@ -23,7 +30,7 @@ docker run --rm -it \
 
 2. Flash the .elf file:
 
-    From the folder of this README.md file execute:
+    Open another terminal from the folder of this README.md file, and execute:
 
     arm-none-eabi-gdb build/final.elf
 
