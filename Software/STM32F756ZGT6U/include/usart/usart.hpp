@@ -39,9 +39,16 @@ namespace usart {
       /**
        * @brief Send an entire string to the USART/UART transmit FIFO buffer one byte at a time.
        * 
-       * @param str The string to be send to the USART/UART transmit FIFO buffer.
+       * @param str The string to be sent to the USART/UART transmit FIFO buffer.
        */
       void send_string(const char* str);
+
+      /**
+       * @brief Send an entire string to the USART/UART transmit FIFO buffer one byte at a time.
+       * 
+       * @param ib The input buffer to be sent to the USART/UART transmit FIFO buffer.
+       */
+      void send_string(input_buffer::INPUT_BUFFER<global_vars::MAX_INPUT_LEN>& ib);
 
       /**
        * @brief Read a byte from the receive FIFO buffer into @ib which is an internal buffer for storage and access.

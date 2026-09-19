@@ -40,13 +40,27 @@ namespace usart
     void USART::send_string(const char* str)
     {
       // Iterate over the string
-      for (std::uint32_t i = 0; str[i]!='\0' ; i++)
+      for (std::uint32_t i = 0; str[i]!='\0'; i++)
       {
         // Push string index element into USART/UART transmit FIFO buffer.
         send(str[i]);
       }
       // Wait till transmission is complete
       while(!test_bits(usart_regs_->ISR, USART_ISR::TC));
+    }
+
+    void USART::send_string(input_buffer::INPUT_BUFFER<global_vars::MAX_INPUT_LEN>& ib)
+    {
+      // Iterate over the string
+      for (std::uint32_t i = 0; i < ib.size(); i++)
+      {
+        // Push string index element into USART/UART transmit FIFO buffer.
+        send(ib[i]);
+      }
+      // Wait till transmission is complete
+      while(!test_bits(usart_regs_->ISR, USART_ISR::TC));
+      // Empty the buffer
+      //ib.clear();
     }
 
     void USART::read(input_buffer::INPUT_BUFFER<global_vars::MAX_INPUT_LEN>& ib)
