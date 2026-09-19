@@ -119,6 +119,6 @@ namespace nvic{
   };
 
   /** NVIC controller */
-  inline NVIC nvic(addresses::NVIC_ISER0);
+  inline NVIC nvic(addresses::NVIC);
   
 }
