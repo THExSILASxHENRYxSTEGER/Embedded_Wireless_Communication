@@ -16,6 +16,8 @@ namespace global_vars
   /** Bit zero to be shifted */
   constexpr std::uint32_t BIT_0 = 0x1;
   
-  /** Maximum length of a video and name title */
-  constexpr std::uint32_t MAX_INPUT_LEN = 50;
+  /** Maximum length of a message to be sent and received */
+  constexpr std::uint32_t MAX_INPUT_LEN = 512;
+
+
 }
