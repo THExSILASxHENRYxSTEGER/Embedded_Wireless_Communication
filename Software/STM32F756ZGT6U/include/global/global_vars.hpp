@@ -18,6 +18,4 @@ namespace global_vars
   
   /** Maximum length of a message to be sent and received */
   constexpr std::uint32_t MAX_INPUT_LEN = 512;
-
-
 }
