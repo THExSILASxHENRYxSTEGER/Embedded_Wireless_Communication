@@ -4,6 +4,7 @@
 #include "gpio/gpio_bits.hpp"
 #include "input_buffer/input_buffer.hpp"
 #include "i2c/i2c.hpp"
+#include "lcd/lcd.hpp"
 #include "nvic/nvic_bits.hpp"
 #include "nvic/nvic.hpp"
 #include "rcc/rcc.hpp"
@@ -54,8 +55,8 @@ int main(){
   if (!i2c_init)
     return 0;
 
-  // Wait for the timer
-  //basic_timer::basic_timer_6.wait_for(37,%20basic_timer::DURATION::MICRO_SECONDS)
+  // Initialize LCD
+  lcd::lcd.init();
 
   // Initialize USART2
   usart::usart_2.init(CLK_FREQ::_16_MHZ, BAUD_RATE::_9_6_K);
@@ -70,8 +71,10 @@ int main(){
     // Wait until usart has read all characters of the search request
     while(!input_buffer::ib.answered());
     // Print the answer
-    usart::usart_2.send_string("\nYour message is sent to I2C:\n");
-    i2c::i2c2.send_string(input_buffer::ib);
+    usart::usart_2.send_string("\nYour message is sent to The LCD:\n");
+    
+    // Print buffer to the lcd
+    lcd::lcd.print(input_buffer::ib);
 
     // Prompt the user for new input
     usart::usart_2.send_string("\nSent successfully, you can now tell me something else.\n");
