@@ -42,6 +42,21 @@ constexpr std::underlying_type_t<E> operator|(E lhs, E rhs)
 }
 
 /**
+ * @brief Performs a bitwise OR between two different enumeration values.
+ * 
+ * @tparam E1 Enumeration type 1.
+ * @tparam E2 Enumeration type 2.
+ * @param lhs Left hand enumeration type 1.
+ * @param rhs Right hand enumeration type 2.
+ * @return constexpr std::underlying_type_t<E1>  The ORed value of the two underlying enumeration types
+ */
+template<RegisterEnum E1, RegisterEnum E2>
+constexpr std::underlying_type_t<E1> operator|(E1 lhs, E2 rhs)
+{
+  return static_cast<std::underlying_type_t<E1>>(to_underlying(lhs) | to_underlying(rhs));
+}
+
+/**
  * @brief Performs a bitwise OR between on uint32_t and one enumeration value.
  *
  * @tparam E Enumeration type with a std::uint32_t underlying type.
@@ -67,6 +82,34 @@ template<RegisterEnum E>
 constexpr std::uint32_t operator|(E lhs, std::uint32_t rhs)
 {
   return to_underlying(lhs) | rhs;
+}
+
+/**
+ * @brief OR operation on one enumeration type and a char on the right hand side.
+ * 
+ * @tparam E The enumeration type
+ * @param lhs The enumeration typed variable to be tansformed back to the underlying.
+ * @param rhs The char value.
+ * @return constexpr char The returned value, as a char.
+ */
+template<RegisterEnum E>
+constexpr char operator|(E lhs, char rhs)
+{
+  return to_underlying(lhs) | rhs;
+}
+
+/**
+ * @brief OR operation on one char and an enumeration type on the right hand side.
+ * 
+ * @tparam E The enumeration type
+ * @param lhs The char value. 
+ * @param rhsThe enumeration typed variable to be tansformed back to the underlying.
+ * @return constexpr char The returned value, as a char.
+ */
+template<RegisterEnum E>
+constexpr char operator|(char lhs, E rhs)
+{
+  return lhs | to_underlying(rhs);
 }
 
 /**
@@ -259,3 +302,8 @@ constexpr std::underlying_type_t<E> operator%(E lhs, std::uint32_t rhs)
   return to_underlying(lhs) % rhs;
 }
 
+template<RegisterEnum E>
+constexpr std::underlying_type_t<E> operator~(const E lhs)
+{
+  return ~to_underlying(lhs);
+}
