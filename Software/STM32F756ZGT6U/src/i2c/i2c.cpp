@@ -134,6 +134,14 @@ namespace i2c
     //ib.clear();
   }
 
+  void I2C::send_byte(char c)
+  {
+    // Write exactly one byte
+    std::uint32_t len = 0x1; 
+    set_write(len);
+    push(c);
+  }
+
   void I2C::set_write(std::uint32_t len)
   {
     // Clear the number of bits specified for the previous write
